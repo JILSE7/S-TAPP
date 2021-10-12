@@ -1,0 +1,61 @@
+$border : 1px solid black;
+$skytel: #0b0b1d;
+
+
+
+
+//FLEX
+
+.flex-center{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-center-space{
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+.flex-center-column{
+
+    display: flex;
+    
+    align-items: center;
+    flex-direction: column;
+    width: 90%;
+    border: 1px solid black;
+}
+
+//WIDTHS
+
+.w-90{
+ width: 90%;
+}
+
+
+//TEXT
+.text-center{
+    text-align: center !important;
+}
+
+.css-xumdn4, .css-1zts0j{
+    text-align: center !important;
+}
+
+
+//MARGIN
+.mt-5 {
+    margin-top: 1.5rem !important;
+}
+
+.mt-6{
+    margin-top: 2.5rem;
+}
+
+
+
