@@ -12,27 +12,28 @@
 
 .container{
 
+
+
     .navbar{
         background-color: #0b0b1d;
         width: 100%;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-around;
         color: white;
         img{
-            width: 160px;
+            width: 170px;
             margin-left: 20px;
+        }
+        h1{
+            color: white;
         }
 
         nav{
             margin-right: 20px;
             text-align: center;
             ul{
-                
                 text-align: center;
-                
-                
-
             }
         }
 
@@ -40,6 +41,26 @@
         .iconHeader{
             color: white;
             font-size: 36px;
+            transition: all 300ms;
+            &:hover{
+                color: darkgreen;
+            }
+        }
+    }
+
+    .reports{
+        
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+
+        .date{
+            
+            width: 50%;
+            text-align: center;
+            margin-top: 20px;
         }
     }
 
@@ -47,6 +68,7 @@
 
     .table_report{
         background-color: rgba(235, 235, 235, 0.742);
+        width: 100%;
         
     }
 
@@ -68,7 +90,7 @@
 
 
 .report{
-    border: 1px solid black;
+    
     width: 80%;
     .headerReport{
         background-color: rgba(235, 235, 235, 0.742);
@@ -98,5 +120,9 @@
             }
         }
     }
-    
+
+}
+
+th{
+    padding: 20px;
 }

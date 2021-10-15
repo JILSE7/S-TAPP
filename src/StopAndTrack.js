@@ -1,9 +1,12 @@
 import React from 'react'
 import AppRouter from './Router/AppRouter'
+import { StopProvider } from './Store/StoreContext'
 
 const StopAndTrack = () => {
   return (
-    <AppRouter/>
+    <StopProvider>
+      <AppRouter/>
+    </StopProvider>
   )
 }
 
