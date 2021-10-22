@@ -1,0 +1,41 @@
+
+
+    
+.load_data{
+    .form_load{
+        width: 500px;
+        height: 150px;
+        
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+
+        .icon{
+            font-size: 36px;
+        }
+
+        .btn{
+            
+            border: 1px solid rgb(59, 146, 55);
+            border-radius: 5px;
+            height: 40px;
+            width: 80px;
+            color: rgb(59, 146, 55);
+            font-size: 16px;
+            transition: all 300ms;
+
+            &:hover{
+                background-color: rgb(28, 126, 20);
+                
+                color: white;
+            }
+        }
+
+        .btn_inactive{
+            cursor: not-allowed;
+        }
+    }
+}

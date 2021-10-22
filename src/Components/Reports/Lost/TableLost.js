@@ -18,6 +18,8 @@ const antIcon = <LoadingOutlined style={{ fontSize: 54 }} spin />;
 
 const TableLost = ({data, comments, isLoading}) => {
 
+    
+
     if(isLoading){
         return(
             <div style={{width:"100%",display:"flex", justifyContent:"center", marginTop:"20px"}}>
@@ -27,6 +29,7 @@ const TableLost = ({data, comments, isLoading}) => {
     }
     return (
         <Table variant="striped" className="text-center table_report">
+            
             {data.length > 0 && <TableCaption className="text-center">{comments}</TableCaption>}
             <TableCaption></TableCaption>
                   <Thead className="text-center tableHeader">

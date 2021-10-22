@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { fetchFunction } from '../Helpers/fetch';
 
 const UseData = () => {
@@ -13,8 +13,9 @@ const UseData = () => {
 
     const [isLoading, setIsloading] = useState(true);
     const [dateReport, setDate] = useState(undefined);
+    const [newData, setnewData] = useState(false);
 
-    console.log(dateReport);
+    
 
     //Funcion para obtener la data
     const getData = async() => {
@@ -41,8 +42,9 @@ const UseData = () => {
 
     
     useEffect(() => {
+        
         getData();
-    }, [dateReport]);
+    }, [dateReport, newData]);
 
 
     return {
@@ -50,6 +52,7 @@ const UseData = () => {
         isLoading,
         setIsloading,
         setDate,
+        setnewData,
         dateReport
     }
 
