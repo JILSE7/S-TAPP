@@ -64,7 +64,6 @@ const LoadData = () => {
                 push('/Reports'); // Nos vamos a la pagina de reportes
             }else{
 
-            
                 setTimeout(() => {
                     Swal.fire({
                         icon: 'error',
@@ -74,9 +73,6 @@ const LoadData = () => {
                 }, 300);
             }       
         } 
-        
-
-
     }   
 
 

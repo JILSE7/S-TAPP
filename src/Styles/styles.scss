@@ -28,5 +28,21 @@ body{
     
 }
 
+//DRAWER
+.drawer{
+    text-align: center;
+    color: white;
+    .ant-drawer-wrapper-body, .ant-drawer-header {
+        background-color: $stop !important;
+    }
+    .ant-drawer-title{
+        color: white;
+    }
+
+    a{
+        color: white !important;
+    }
+}
+
 
 

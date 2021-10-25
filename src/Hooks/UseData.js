@@ -5,7 +5,8 @@ const UseData = () => {
     const [data, setData] = useState({
         msi: [],
         located: [],
-        lost: []
+        lost: [],
+        chart: []
     });
 
 /*     const [isLoadingMSI, setisLoadingMSI] = useState(true);
@@ -19,10 +20,11 @@ const UseData = () => {
 
     //Funcion para obtener la data
     const getData = async() => {
-        const [MSI, loc, lost] = await Promise.all([
+        const [MSI, loc, lost, chart] = await Promise.all([
                 (await fetchFunction(dateReport? `Routes/MSI.php?date="${dateReport}"` : "Routes/MSI.php")).json(),
                 (await fetchFunction(dateReport? `Routes/Located.php?date="${dateReport}"` : 'Routes/Located.php')).json(),
-                (await fetchFunction(dateReport? `Routes/Lost.php?date="${dateReport}"` : 'Routes/Lost.php')).json()
+                (await fetchFunction(dateReport? `Routes/Lost.php?date="${dateReport}"` : 'Routes/Lost.php')).json(),
+                (await fetchFunction(dateReport? `Routes/Chart.php?date="${dateReport}"` : 'Routes/Chart.php')).json()
         ]);
 
         setIsloading(true);
@@ -31,7 +33,8 @@ const UseData = () => {
         setData({
             msi: [...MSI],
             located: [...loc],
-            lost : [...lost]
+            lost : [...lost],
+            chart: [...chart]
         });
 
         setTimeout(() => {
