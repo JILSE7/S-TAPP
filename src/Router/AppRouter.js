@@ -25,7 +25,7 @@ const AppRouter = () => {
                 </Switch>
             </div>
         </Router>
-    )
+    ) 
 }
 
-export default AppRouter
+export default AppRouter;

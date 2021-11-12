@@ -6,7 +6,7 @@ const Footer = () => {
     return (
     
         <footer className="navbar">
-        <img className="logo" src={logo}/>
+        <img className="logo" src={logo} alt="snt"/>
 
       
 

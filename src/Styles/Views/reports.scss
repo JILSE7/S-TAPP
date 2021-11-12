@@ -12,10 +12,11 @@
 
 .container{
 
-
+    background-color: rgb(251, 251, 251);
 
     .navbar{
-        background-color: #0b0b1d;
+        background-color: #07101d;
+        //box-shadow: 0px 0px 15px rgb(7, 172, 26);
         width: 100%;
         display: flex;
         align-items: center;
@@ -43,7 +44,6 @@
 
 
     .reports{
-        
         width: 95%;
         display: flex;
         flex-direction: column;
@@ -51,58 +51,149 @@
 
         .date{
             
-            width: 50%;
+            width: 100%;
             text-align: center;
             margin: 20px 0;
+
+            .ant-picker{
+                margin-right: 150px;
+            }
+
+            .car-stock{
+                font-size: 35px;
+                margin-right: 5px;
+                color: #07101d;
+                transition: all 300ms;
+
+                &:hover{
+                    color: #032a60;
+                }
+                            
+            }
+
+            .car-stock-active{
+                color: #044ca3 !important;
+            }
+
+
+            
+
+            p, h2{
+                margin: 0;
+                color: #186cd1;
+            }
         }
+
+        h1{
+            color: rgb(244, 244, 244);
+        }
+
 
 
         .charts{
-            width: 100%;
-            height: 100vh;
-            margin-top: 20px;
-            border: 1px solid black;
+            min-width: 1300px;
+            height: 680px;
+            border: 2px solid #186bd1c4;
             display: flex;
-            flex-flow: row wrap;
+            position: relative;
+            background-color: #07101d;
+            border-radius: 5px;
+            padding: 10px;
+            .chart-center{
+                position: absolute;
+                
+                height: 600px;
+                width: 600px;
+                border-radius: 100%;
+                border: 2px solid #186cd1;
+                bottom: 40px;
+                left: 340px;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 999;
+                background-color: #07101d;
+                padding: 100px;
+            }
 
             div{
-                width: 50%;
-                height: 90%;
-                border: 1px solid black;
-            }
-        }
-
-        .filtered{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            height: 50px;
-            .car-stock{
-                font-size: 20px;
+                
+                flex: 1;
                 
             }
-            p{
-                margin: 0;
+
+            .chart-seccion{
+                display: flex;
+                height: 100%;
+                flex-direction: column;
+                
+                .chart-item{
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .rigth{
+                    padding-right: 100px;
+                }
+                .left{
+                    padding-left: 90px;
+                }
+                .text-end{
+                    text-align: end;
+                }
+
+                .text-start{
+                    text-align: start;
+                }
+
+                .kpi{
+                    h3{
+                        color: white;
+                    }
+                }
+               
+
             }
+
+            .borderBottom{
+                border-bottom: 2px solid #186cd1;
+                
+            }
+            .ml-5{
+                margin-left: 35px;
+            }
+            .mr-5{
+                margin-right: 15px;
+            }
+
+
         }
+
+        
+        
+
+       
     }
 
     
 
     .table_report{
-        background-color: rgba(235, 235, 235, 0.742);
+        background-color: #07101d;
         width: 100%;
-        
+        padding: 20px;
+        border-bottom: 2px solid #186cd1;
+        border-left: 2px solid #186cd1;
+        border-right: 2px solid #186cd1;
     }
-
-
 
     .separator{
         width: 60%;
         height: 5px;
-        background-color: black;
-        background-color: rgb(6, 6, 74);
+        
+        
         margin-bottom: 20px;
     }
 
@@ -114,12 +205,11 @@
     font-size: 36px;
     transition: all 300ms;
     &:hover{
-        color: darkgreen;
+        color: #044ca3;
     }
 }
 
 .iconActive{
-    
         color: darkgreen !important;
     
 }
@@ -133,18 +223,26 @@
 
 .report{
     
-    width: 80%;
+    min-width: 1300px;
     .headerReport{
-        background-color: rgba(235, 235, 235, 0.742);
-        //background-color: rgb(6, 6, 74);
+        background-color: #07101d;
+        border-bottom: 2px solid #186cd1;
+        border-top  : 2px solid #186cd1;
+        border-left: 2px solid #186cd1;
+        border-right: 2px solid #186cd1;
         width: 100%;
-        color: #06064a;
         text-align: center;
         padding: 0 0 8px 0;
+
+        h4, h5, .css-18i7bby,.css-18i7bb, .ant-modal-close-x,.ant-modal-footer, caption{
+            color: rgb(189, 184, 184) !important;
+            text-align: center;
+        }
 
 
         .headerButtons{
             
+            color: whitesmoke;
             
             .btn{
                font-size: 46px;
@@ -182,3 +280,4 @@
 th{
     padding: 20px;
 }
+

@@ -7,7 +7,7 @@ export const StopContext = createContext();
 export const StopProvider = ({children}) => {
 
         //HOOK USE DATA
-        const {msi, located,lost, chart,isLoading, setIsloading, setDate, dateReport, setnewData} = UseData()
+        const {msi, located,lost,isLoading, chartMsi, chartLocated,setIsloading, setDate, dateReport, setnewData} = UseData()
 
         //Stockt
         const [stock, setStock] = useState(false);
@@ -24,12 +24,12 @@ export const StopProvider = ({children}) => {
 
             if(stock){
                 setCurrentpage(0);
-                setlostFiltered(newStock(lost));
-                setlocatedFiltered(newStock(located));
+                console.log('quiero ver el almacen');
             }else{
                 setCurrentpage(0);
-                setlostFiltered([]);
-                setlocatedFiltered([]);
+                setlostFiltered(newStock(lost));
+                setlocatedFiltered(newStock(located));
+                console.log('no quiero ver el stock');
 
             }
         }, [stock, located, lost]);
@@ -40,7 +40,8 @@ export const StopProvider = ({children}) => {
         <StopContext.Provider value={{msi, 
                                       located, 
                                       lost ,
-                                      chart,
+                                      chartMsi,
+                                      chartLocated,
                                       isLoading, 
                                       dateReport, 
                                       stock,

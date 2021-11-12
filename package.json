@@ -1,6 +1,6 @@
 {
   "name": "stopandtrack",
-  "homepage": "http://localhost/st3.1/",
+  "homepage": "http://localhost/st3/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

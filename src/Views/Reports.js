@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 //Ant
 import { DatePicker } from 'antd';
@@ -11,11 +11,10 @@ import { StopContext } from '../Store/StoreContext'
 import UseChart from '../Hooks/UseChart';
 
 //ICONS
-import {ImCheckboxChecked,ImCheckboxUnchecked} from 'react-icons/im';
-import {AiTwotoneCar} from 'react-icons/ai';
+import {GiHomeGarage} from 'react-icons/gi';
 import { format } from 'date-fns';
-import PieComponent from '../Components/Charts/Pie';
-import PieRechart from '../Components/Charts/PieRechart';
+import BarComponent from '../Components/Charts/BarComponent';
+import BarHorizontalComponent from '../Components/Charts/BarHorizontalComponent';
 
 
 
@@ -25,8 +24,9 @@ const Reports = () => {
     const {setDate, dateReport, stock, setStock} = useContext(StopContext);
 
     //Custom-Hook
-    const {total , val, labels, data} = UseChart();
-   
+    const {labels, cReason, cReasonLabels, chartFiltered, chartLost} = UseChart();
+
+    
     //ToogleFunction
     const toggleStock = () => {
         setStock(!stock)
@@ -45,28 +45,50 @@ const Reports = () => {
         <div className="container">
             <Header/>
             <main className="reports">
-                <div className="date">
-                        <h1>Fecha de Reportes: {dateReport ? dateReport : format(new Date(), "yyyy-MM-dd")} </h1>
+                <div className="date flex-center-space">
+                    
+                        <h2>Fecha de Reportes: {dateReport ? dateReport : format(new Date(), "yyyy-MM-dd")} </h2>
                         <DatePicker onChange={onChange} />
+                        <div className="flex-center align-end"><GiHomeGarage 
+                             className={ (stock) ? "car-stock car-stock-active" : "car-stock"} 
+                             onClick={toggleStock}/> <p>Almacen</p>
+                        </div>
                 </div>
-                <div className="filtered">
-                    <div className="flex-center"><AiTwotoneCar className="car-stock"/> <p>No Ver Almacen</p></div>
-                    {(stock) ? (<ImCheckboxChecked onClick={toggleStock}/>) : (<ImCheckboxUnchecked onClick={toggleStock}/>)}
-                </div>
-                <div className="charts">
-                    <div>
-                        <PieComponent labels={labels} total={total} val={val}/>
+                
+              
+                <section className="charts">
+                    <div className="chart-center">
+                    <BarComponent  y={true} labels={labels}/>
+                    </div>
+                    <div className="chart-seccion">
+                        <div className="chart-item borderBottom">
+                            <BarComponent title={'Desapariciones'} labels={labels} data={[chartFiltered.msi.labels, chartFiltered.located.labels]} chartData={[chartFiltered.msi.data, chartFiltered.located.data]}/>
+                        </div>
+                        <div className="chart-item">
+                            <BarHorizontalComponent  y={true} title={'Causas Principales'} labels={chartLost.labels} y={true} data={cReason} />
+                        </div>
                     </div>
                     <div>
-                        <PieRechart data={data}/>
+                        
+                    </div>
+                    <div className="chart-seccion">
+                        <div className="chart-item borderBottom ">
+                            {/* <BarComponent position={true} title={'Localizados'} labels={labels} data={cLocated} chartData={chartLocated}/> */}
+                        </div>
+                        <div className="chart-item">
+                            <BarComponent  y={true} position={true} title={'Tiempo Promedio'}  />
+                        </div>
                     </div>
                    
-                </div>
+                </section>
+               
+                
             </main>
             <section className="reports">
                 <Report className="mt-5"/>
             </section>
             <Footer/>
+    
         </div>
     )
 }

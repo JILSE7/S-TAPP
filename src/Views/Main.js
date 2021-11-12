@@ -7,7 +7,7 @@ const Main = () => {
     return (
         <div className="container flex-center">
         <div className="menu-center">
-            <img className="logo" src={logo} />
+            <img className="logo" src={logo}  alt="snt"/>
 
             <Link to ="/Reports"><h1 className="title-enter">Entrar</h1> </Link>
         </div>

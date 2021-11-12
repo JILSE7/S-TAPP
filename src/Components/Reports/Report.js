@@ -16,7 +16,7 @@ const Report = () => {
     const {msi, located, lost, isLoading, lostFiltered, locatedFiltered,stock, currentPage, setCurrentpage} = useContext(StopContext);
 
     const filteredLost = () => {
-            if(stock){
+            if(!stock){
                 return lostFiltered.slice(currentPage,currentPage + 15);
             }else{
                 return lost.slice(currentPage,currentPage + 15);
@@ -44,10 +44,10 @@ const Report = () => {
                 <HeaderReport 
                 typeReport={"Located"} 
                 description={"Resumen de unidades que volvieron a reportar despues de estar por lo menos 24hrs perdidos "} 
-                dl={(!stock)? located.length : locatedFiltered.length}
+                dl={(stock)? located.length : locatedFiltered.length}
                 located={true}/>
               
-                <TableLocated data={(!stock)? located : locatedFiltered} comments={"Located Report"} isLoading={isLoading}  />
+                <TableLocated data={(stock)? located : locatedFiltered} comments={"Located Report"} isLoading={isLoading}  />
               
                         
             </div>
@@ -59,7 +59,7 @@ const Report = () => {
                 filtered={currentPage}
                 setFiltered={setCurrentpage}
                 numberData={lost.length}
-                dl={(!stock)? lost.length : lostFiltered.length}
+                dl={(stock)? lost.length : lostFiltered.length}
                 />
               
                 <TableLost data={filteredLost()} comments={"Lost Report"} isLoading={isLoading}  />

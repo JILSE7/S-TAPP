@@ -1,29 +1,69 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { chartData, chartLostData, newStock, newStockChart } from '../Helpers/filterData';
 import { StopContext } from '../Store/StoreContext'
+import UseData from './UseData';
 
 const UseChart = () => {
-    const {chart} = useContext(StopContext);
+    //EXTRACCION DEL CONTEXTO
+    const {chartMsi = [], chartLocated=[],lostFiltered,lost,stock, isLoading} = useContext(StopContext);
 
-    const data = [];
-    chart.forEach(status => {
-        data.push({name: !status.name ? "Sin status": status.name, value: status.value * 1})
+    const [chartFiltered, setchartFiltered] = useState({msi: {data:[], labels: []}, located: {data: [], labels: []}});
+    const [chartLost, setchartLost] = useState({data: [], labels: []});
+    
+
+    //Efecto para filtrar los datos del almacen
+    useEffect(() => {
+        
+    if(!stock){
+        setchartFiltered({msi: { data : newStockChart(chartMsi, true), labels:chartData(newStockChart(chartMsi, true), true) }, located : {data: newStockChart(chartLocated), labels: chartData(newStockChart(chartLocated)) }});
+        setchartLost({labels : chartLostData(lostFiltered)});
+
+    }else{
+        setchartFiltered({msi: {data:chartMsi, labels: chartData(chartMsi,true)}, located: {data: chartLocated, labels: chartData(chartLocated)}});
+        setchartLost({labels : chartLostData(lost)});
+    }
+        
+    }, [isLoading, stock])
+    
+    console.log(stock);
+    
+    //ETIQUETAS DE LAS FECHAS
+    const labels = chartMsi.map(msi => msi.date);
+    labels.sort();
+
+
+    //VALORES EN GRAFICA DE BARRAS
+
+    const cReason = [];
+    chartLocated.forEach((loc, i) => {
+        
+        loc.located.forEach(status => cReason.push((status.H_Conectivity_Alias_2_Status === null) ? 'Sin status registrado' : status.H_Conectivity_Alias_2_Status));
     });
 
-    
-    
-    const total = chart.reduce((a,c) => a+(c.value)*1, 0);
-    const val = chart.map(n => n.value);
-    const labels = chart.map(n => (n.name == null) ? "sin registro" : n.name);
+    //LABELS C
+    const cReasonLabels =[ ...new Set(cReason)];
 
     
+    
+    /* for(let countR of cReasonLabels ){
+        console.log(countR);
+    } */
+
+          
+    
+    
+   
     
     
     return{
-        data,
-        total,
-        val,
-        labels
+        labels,
+        cReason,
+        cReasonLabels,
+        chartFiltered,
+        chartLost
+
     }
+    
    
 }
 

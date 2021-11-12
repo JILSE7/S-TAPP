@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 //Assets
 import logo from '../../Assets/logost3.png';
 //React-Router
-import { Link, NavLink } from 'react-router-dom';
+import {NavLink } from 'react-router-dom';
 //React icons
 import {IoMdHome, IoMdSpeedometer} from 'react-icons/io';
 import {RiMenu4Fill} from 'react-icons/ri'
@@ -25,7 +25,7 @@ const Header = () => {
     return (
     
         <header className="navbar">
-        <img className="logo" src={logo}/>
+        <img className="logo" src={logo} alt="snt"/>
 
         <h1>Reportes <span><IoMdSpeedometer/></span></h1>
         <nav>

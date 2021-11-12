@@ -24,7 +24,7 @@ const UseData = () => {
                 (await fetchFunction(dateReport? `Routes/MSI.php?date="${dateReport}"` : "Routes/MSI.php")).json(),
                 (await fetchFunction(dateReport? `Routes/Located.php?date="${dateReport}"` : 'Routes/Located.php')).json(),
                 (await fetchFunction(dateReport? `Routes/Lost.php?date="${dateReport}"` : 'Routes/Lost.php')).json(),
-                (await fetchFunction(dateReport? `Routes/Chart.php?date="${dateReport}"` : 'Routes/Chart.php')).json()
+                (await fetchFunction(dateReport? `Routes/Chart.php?date=${dateReport}` : 'Routes/Chart.php')).json()
         ]);
 
         setIsloading(true);
@@ -34,12 +34,13 @@ const UseData = () => {
             msi: [...MSI],
             located: [...loc],
             lost : [...lost],
-            chart: [...chart]
+            chartMsi: [...chart.msi],
+            chartLocated : [...chart.located]
         });
 
-        setTimeout(() => {
+        
             setIsloading(false);
-        }, 800);
+        
 
     }
 
@@ -48,7 +49,6 @@ const UseData = () => {
         
         getData();
     }, [dateReport, newData]);
-
 
     return {
         ...data,

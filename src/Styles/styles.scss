@@ -25,6 +25,8 @@ body{
     justify-content: space-between ;
     align-items: center;
     flex-direction: column;
+    overflow-y: scroll;
+ 
     
 }
 
@@ -43,6 +45,37 @@ body{
         color: white !important;
     }
 }
+
+//Modal
+.modal{
+
+    h4, h5, .css-18i7bby, .ant-modal-close-x{
+        color: white;
+        text-align: center;
+    }
+    .ant-modal-content{
+        background-color: #07101d !important;
+        height: auto;
+    }
+    .ant-modal-header, .ant-modal-footer{
+        background-color: $stop !important;
+        border-bottom: 2px solid #186cd1;
+        border-top: none;
+    }
+    .ant-modal-body{
+        height: 100%;
+        color: white;
+    }
+    .ant-modal-title{
+        color: whitesmoke;
+        text-align: center;
+    }
+}
+
+.css-18i7bby{
+    color: white;
+}
+
 
 
 
