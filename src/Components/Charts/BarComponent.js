@@ -11,7 +11,7 @@ import TableLocated from '../Reports/Located/TableLocated';
 
 
 
-const BarComponent = ({title, labels, data = [], chartData, msi = false, y= false, position = false}) => {
+const BarComponent = ({title, labels, data = [], chartData, msi = false, y= false, position = false, chartH}) => {
 
 
     //Drawer
@@ -122,7 +122,7 @@ const BarComponent = ({title, labels, data = [], chartData, msi = false, y= fals
                     
                 }
             }}
-            height={"250"}
+            height = {chartH}
             />
             
                 <Modal

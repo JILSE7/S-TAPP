@@ -62,10 +62,10 @@ const Reports = () => {
                     </div>
                     <div className="chart-seccion">
                         <div className="chart-item borderBottom">
-                            <BarComponent title={'Desapariciones'} labels={labels} data={[chartFiltered.msi.labels, chartFiltered.located.labels]} chartData={[chartFiltered.msi.data, chartFiltered.located.data]}/>
+                            <BarComponent title={'MSI/LOCATED'} labels={labels} data={[chartFiltered.msi.labels, chartFiltered.located.labels]} chartData={[chartFiltered.msi.data, chartFiltered.located.data]} chartH={250} />
                         </div>
                         <div className="chart-item">
-                            <BarHorizontalComponent  y={true} title={'Causas Principales'} labels={chartLost.labels} y={true} data={cReason} />
+                            <BarHorizontalComponent  y={true} title={'Causas Principales'} data={chartLost.data} arr={chartLost.arr} y={true} />
                         </div>
                     </div>
                     <div>
@@ -76,7 +76,7 @@ const Reports = () => {
                             {/* <BarComponent position={true} title={'Localizados'} labels={labels} data={cLocated} chartData={chartLocated}/> */}
                         </div>
                         <div className="chart-item">
-                            <BarComponent  y={true} position={true} title={'Tiempo Promedio'}  />
+                            <BarComponent  y={true} position={true} title={'Tiempo Promedio'}  chartH={330}/>
                         </div>
                     </div>
                    

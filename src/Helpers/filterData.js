@@ -19,16 +19,37 @@ export const chartData = (data, msi = false) => {
     return labels;
 }
 
+//Causas Principales
 
-export const chartLostData = (data) => {
-    const aux = [];
-    data.forEach((lost) => {
-
-        (lost.H_Conectivity_Alias_2_Status === null) ? aux.push('Sin status registrado') : aux.push(lost.H_Conectivity_Alias_2_Status)
-        
-        //loc.located.forEach(status => cReason.push((status.H_Conectivity_Alias_2_Status === null) ? 'Sin status registrado' : status.H_Conectivity_Alias_2_Status));
-    });
-
-     return [ ...new Set(aux)];
-    
+//Labels
+export const chartLostLabels = (data) => {
+    return [ ...new Set(data.map(lost => (lost.H_Conectivity_Alias_2_Status === null) ? 'Sin status registrado' : lost.H_Conectivity_Alias_2_Status))]; 
 }
+
+//DataLabels
+export const chartLostData = (labels, data, arr = false) => {
+    
+    let aux2 = {};
+    for(const label of labels){
+        //aux2 = {...aux2, [label]: data.filter(key =>(label === 'Sin status registrado') ? key.H_Conectivity_Alias_2_Status === null:  key.H_Conectivity_Alias_2_Status === label)}
+        aux2 = {...aux2, [label]:(!arr) ? filter(data,label,true) : filter(data,label)}
+    }
+
+    return aux2;
+}
+
+//Count Data
+
+export const filter = (obj,label,length = false) => {
+
+    if(length){
+        return obj.filter(key =>(label === 'Sin status registrado') ? key.H_Conectivity_Alias_2_Status === null:  key.H_Conectivity_Alias_2_Status === label).length
+    }else{
+        return obj.filter(key =>(label === 'Sin status registrado') ? key.H_Conectivity_Alias_2_Status === null:  key.H_Conectivity_Alias_2_Status === label)
+    }
+
+     //return Object.values(obj).map(item => item.length);
+}
+
+
+

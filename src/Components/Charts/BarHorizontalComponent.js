@@ -4,55 +4,43 @@ import React, {useEffect, useState } from 'react'
 import {Modal} from 'antd';
 
 //Chartjs
-import {Bar} from 'react-chartjs-2'
+import {Bar,Doughnut} from 'react-chartjs-2'
+import TableLost from '../Reports/Lost/TableLost';
+import HeaderReport from '../Reports/HeaderReport';
 /* import HeaderReport from '../Reports/HeaderReport';
 import TableMSI from '../Reports/MSI/TableMSI';
 import TableLocated from '../Reports/Located/TableLocated'; */
 
 
 
-const BarHorizontalComponent = ({title, labels, data, y= false, position = false}) => {
+const BarHorizontalComponent = ({title, data,arr, y= false, position = false}) => {
 
-    //console.log(data);
+    console.log(arr);
+    
 
-   /*  //Drawer
+    //Drawer
     const [visible, setVisible] = useState(false);
-    const [drawerData, setdrawerData] = useState({date: '', msi: []});
+    const [drawerData, setdrawerData] = useState([]);
     const [long, setLong] = useState(0);
+    const [titleLost, setTitleLost] = useState('')
 
 
 
-    useEffect(() => (msi) ? setLong(drawerData.msi.length) : setLong(drawerData.located?.length), [drawerData,msi]);
-     */
-  
+    useEffect(() => setLong(drawerData.length), [drawerData]);
+    
+    console.log(drawerData);
     return (
         <div className={(position) ? "text-start left kpi": " text-end rigth kpi"}>
             <h3 className={(position) ? "ml-5": "mr-5"}>{data && data[7]}</h3>
             <Bar
                 data={{ 
-                    labels,
+                    labels: Object.keys(data),
                     
                     datasets: [{
                     label: 'Causas Principales',
-                    data: data,
-                    backgroundColor: [
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                    ],
-                    borderColor: [
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(153, 102, 255, 1)',
-                    
-                    ],
+                    data: Object.values(data),
+                    borderColor: 'rgba(234, 39, 4)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderWidth: 1
                 }]
             }}
@@ -71,25 +59,52 @@ const BarHorizontalComponent = ({title, labels, data, y= false, position = false
                         text: title,
                         position:'top'
                     },
+                    
+                
                 },
+                layout: {
+                    autPadding: true
+                },
+                
                 
                 onClick: function(c,i) {
                     let e = i[0];
 
                     if(e){
-                        
-                     /*    setdrawerData( chartData.filter(obj => obj.date === this.data.labels[e.index])[0]);
+                        console.log(this.data.datasets);
+                        const causa = this.data.labels[e.index];
+                        setTitleLost(causa)
+                        setdrawerData(arr[causa]);
 
                         
-                        setTimeout(() => {setVisible(true)}, 300); */
+                        setTimeout(() => {setVisible(true)}, 300);
                     }
                     
                 }
             }}
-            height={"250"}
+            height={"350"}
             />
             
+            <Modal
+                className="modal"
+                title="Detalles del reporte"
+                centered
+                visible={visible}
+                onCancel={() => setVisible(false)}
+                footer={[]}
+                width={1100}
               
+             >
+              
+                     <HeaderReport 
+                    typeReport={'LOST'} 
+                    description={`Resumen de unidades que llevan mas de 24hrs sin reportar - ${titleLost}` }
+                    dl={long}
+                    
+                />
+                <TableLost data={drawerData} comments={"Lost Report"} isLoading={false}  />
+              
+                </Modal> 
            
             
         </div>
