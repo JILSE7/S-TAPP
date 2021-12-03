@@ -12,10 +12,13 @@ import {
     TableCaption,
   } from "@chakra-ui/react";
 import TableBodyLoc from './TableBodyLoc';
+import { getDateForTable } from '../../../Helpers/Date';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 54 }} spin />;
 
 const TableLocated = ({data, comments, isLoading}) => {
+    
+    
 
     if(isLoading){
         return(
@@ -36,6 +39,8 @@ const TableLocated = ({data, comments, isLoading}) => {
                         <Th>Cliente</Th>
                         <Th >Unidad</Th>
                         <Th >Estatus</Th>
+                        <Th >Version</Th>
+                        <Th >Etapa</Th>
                         <Th >Ultimo evento</Th>
                         <Th >Fecha evento</Th>
                         <Th >Dias Desaparecido</Th>
@@ -55,9 +60,11 @@ const TableLocated = ({data, comments, isLoading}) => {
                                     last_event={client.H_Conectivity_Event} 
                                     last_event_date={client.H_Conectivity_Event_Date}
                                     ds={client.Days_Missing}
-                                    date_generation={client.H_Conectivity_Date_Report_Generation}
+                                    date_generation={client.H_Conectivity_Date_Report}
                                     latitude={client.H_Conectivity_Latitude}
                                     longitude={client.H_Conectivity_Longitude}
+                                    stage={client.H_Conectivity_Commercial_Stage}
+                                    version={client.H_Conectivity_Product_Version}
                                     />))
                             }
                         </Tbody>

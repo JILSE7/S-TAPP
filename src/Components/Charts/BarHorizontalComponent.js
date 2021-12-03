@@ -4,19 +4,14 @@ import React, {useEffect, useState } from 'react'
 import {Modal} from 'antd';
 
 //Chartjs
-import {Bar,Doughnut} from 'react-chartjs-2'
+import {Bar} from 'react-chartjs-2'
 import TableLost from '../Reports/Lost/TableLost';
 import HeaderReport from '../Reports/HeaderReport';
-/* import HeaderReport from '../Reports/HeaderReport';
-import TableMSI from '../Reports/MSI/TableMSI';
-import TableLocated from '../Reports/Located/TableLocated'; */
+
 
 
 
 const BarHorizontalComponent = ({title, data,arr, y= false, position = false}) => {
-
-    console.log(arr);
-    
 
     //Drawer
     const [visible, setVisible] = useState(false);
@@ -24,23 +19,22 @@ const BarHorizontalComponent = ({title, data,arr, y= false, position = false}) =
     const [long, setLong] = useState(0);
     const [titleLost, setTitleLost] = useState('')
 
-
+/*     console.log(data.map(item => item.value));
+    console.log(data.map(item => item.status)); */
 
     useEffect(() => setLong(drawerData.length), [drawerData]);
     
-    console.log(drawerData);
     return (
-        <div className={(position) ? "text-start left kpi": " text-end rigth kpi"}>
-            <h3 className={(position) ? "ml-5": "mr-5"}>{data && data[7]}</h3>
+        <div className={" text-end rigth kpi"}>
+            {/* <h3 className={"mr-5"}>{data && data[7]}</h3> */}
             <Bar
                 data={{ 
-                    labels: Object.keys(data),
-                    
+                    labels: data.map(item => item.status),
                     datasets: [{
                     label: 'Causas Principales',
-                    data: Object.values(data),
-                    borderColor: 'rgba(234, 39, 4)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    data: data.map(item => item.value),
+                    borderColor: 'rgba(255,140,0)',
+                    backgroundColor: 'rgba(255,140,0, 0.2)',
                     borderWidth: 1
                 }]
             }}
@@ -63,7 +57,7 @@ const BarHorizontalComponent = ({title, data,arr, y= false, position = false}) =
                 
                 },
                 layout: {
-                    autPadding: true
+                    autoPadding: true
                 },
                 
                 
@@ -74,15 +68,13 @@ const BarHorizontalComponent = ({title, data,arr, y= false, position = false}) =
                         console.log(this.data.datasets);
                         const causa = this.data.labels[e.index];
                         setTitleLost(causa)
-                        setdrawerData(arr[causa]);
-
-                        
-                        setTimeout(() => {setVisible(true)}, 300);
+                        setdrawerData(arr.filter(item => item.status === causa)[0].value);
+                        setTimeout(() => {setVisible(true)}, 300); 
                     }
                     
                 }
             }}
-            height={"350"}
+            height={"270"}
             />
             
             <Modal

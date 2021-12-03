@@ -12,6 +12,8 @@ import TableMSI from './MSI/TableMSI'
 
 const Report = () => {
 
+
+   
     //Context
     const {msi, located, lost, isLoading, lostFiltered, locatedFiltered,stock, currentPage, setCurrentpage} = useContext(StopContext);
 

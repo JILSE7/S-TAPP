@@ -4,7 +4,8 @@ import {
     Td
   } from "@chakra-ui/react";
 
-const TableBodyMSI = ({date_generation,product,customer, unit,status, id_service, last_event, last_event_date, latitude, longitude, lostDays = false}) => {
+const TableBodyMSI = ({date_generation,product,customer, unit,status,version, stage, id_service, last_event, last_event_date, latitude, longitude, lostDays = false}) => {
+    console.log(customer,status, version);
     return (
         <Tr className="text-table font-mon tdTable animate__animated animate__flash">
         <Td className="animate__animated animate__flash" >{date_generation}</Td>
@@ -26,6 +27,8 @@ const TableBodyMSI = ({date_generation,product,customer, unit,status, id_service
         <Td className="animate__animated animate__flash">{customer}</Td>
         <Td className="animate__animated animate__flash">{unit}</Td>
         <Td className="animate__animated animate__flash">{(status)? status : "Sin Status Registrado"}</Td>
+        <Td className="animate__animated animate__flash">{(version)? version : "No Registrado"}</Td>
+        <Td className="animate__animated animate__flash">{(stage) ? stage : "No Registrado"}</Td>
         <Td className="animate__animated animate__flash"><a href={`http://www.google.com/maps/place/${latitude},${longitude}`} target="_blank" rel="noreferrer">{last_event}</a></Td>
         <Td className="animate__animated animate__flash">{last_event_date}</Td>
         {

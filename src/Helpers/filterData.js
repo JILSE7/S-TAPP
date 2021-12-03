@@ -11,35 +11,34 @@ export const newStockChart = function (data, msi = false){
 }
 
 
-//Filtrar LABELS
+//Filtrar datos para las graficas
 export const chartData = (data, msi = false) => {
-    const labels = [];
-    (msi) ? data.forEach((msi, i) => labels.push(data[data.length -(i+1)].msi.length)) : data.forEach((msi, i) => labels.push(data[data.length -(i+1)].located.length));
-
-    return labels;
+    const valuesChart = [];
+    (msi) ? data.forEach((msi, i) => valuesChart.push(data[data.length -(i+1)].msi.length)) : data.forEach((msi, i) => valuesChart.push(data[data.length -(i+1)].located.length));
+    return valuesChart;
 }
 
 //Causas Principales
 
-//Labels
+//Labels - etiquetas para las graficas
 export const chartLostLabels = (data) => {
     return [ ...new Set(data.map(lost => (lost.H_Conectivity_Alias_2_Status === null) ? 'Sin status registrado' : lost.H_Conectivity_Alias_2_Status))]; 
 }
 
 //DataLabels
 export const chartLostData = (labels, data, arr = false) => {
-    
-    let aux2 = {};
+    let aux2;
+    let aux3 = []
     for(const label of labels){
-        //aux2 = {...aux2, [label]: data.filter(key =>(label === 'Sin status registrado') ? key.H_Conectivity_Alias_2_Status === null:  key.H_Conectivity_Alias_2_Status === label)}
-        aux2 = {...aux2, [label]:(!arr) ? filter(data,label,true) : filter(data,label)}
+        aux2 = {status:label, value: (!arr) ? filter(data,label,true) : filter(data,label)}
+        aux3.push(aux2);
     }
-
-    return aux2;
+    
+    aux3 = aux3.sort((a,b) => b.value - a.value);
+    return aux3;
 }
 
-//Count Data
-
+//Contador de datos para la grafica causas principales
 export const filter = (obj,label,length = false) => {
 
     if(length){
@@ -48,8 +47,10 @@ export const filter = (obj,label,length = false) => {
         return obj.filter(key =>(label === 'Sin status registrado') ? key.H_Conectivity_Alias_2_Status === null:  key.H_Conectivity_Alias_2_Status === label)
     }
 
-     //return Object.values(obj).map(item => item.length);
 }
+
+
+
 
 
 

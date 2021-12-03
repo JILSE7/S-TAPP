@@ -1,31 +1,34 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 //Ant
 import { DatePicker } from 'antd';
-
+//Datefsn
+import { format } from 'date-fns';
+//ICONS
+import {GiHomeGarage} from 'react-icons/gi';
+//Context
+import { StopContext } from '../Store/StoreContext'
 //Componets
 import Header from '../Components/Layout/Header'
 import Footer from '../Components/Layout/Footer';
 import Report from '../Components/Reports/Report'
-import { StopContext } from '../Store/StoreContext'
 import UseChart from '../Hooks/UseChart';
-
-//ICONS
-import {GiHomeGarage} from 'react-icons/gi';
-import { format } from 'date-fns';
-import BarComponent from '../Components/Charts/BarComponent';
+import BarComponentCenter from '../Components/Charts/BarComponent';
 import BarHorizontalComponent from '../Components/Charts/BarHorizontalComponent';
+import BarComponent2chart from '../Components/Charts/BarComponent2chart';
+import BarComponentTime from '../Components/Charts/BarComponentTime';
 
 
 
 const Reports = () => {
 
+    
+    
     //Context
-    const {setDate, dateReport, stock, setStock} = useContext(StopContext);
-
+    const {setDate, dateReport, stock, setStock, chartPorcent, chartTime} = useContext(StopContext);
+    
     //Custom-Hook
-    const {labels, cReason, cReasonLabels, chartFiltered, chartLost} = UseChart();
-
+    const {labels,chartFiltered, chartLost} = UseChart();
     
     //ToogleFunction
     const toggleStock = () => {
@@ -57,26 +60,26 @@ const Reports = () => {
                 
               
                 <section className="charts">
-                    <div className="chart-center">
-                    <BarComponent  y={true} labels={labels}/>
+                    <div className="chart-center animate__animated animate__fadeInDownBig" >
+                    <BarComponentCenter  labels={labels} data={chartPorcent} stock={stock} chartH={200}/>
                     </div>
                     <div className="chart-seccion">
-                        <div className="chart-item borderBottom">
-                            <BarComponent title={'MSI/LOCATED'} labels={labels} data={[chartFiltered.msi.labels, chartFiltered.located.labels]} chartData={[chartFiltered.msi.data, chartFiltered.located.data]} chartH={250} />
+                        <div className="chart-item borderBottom animate__animated animate__backInLeft">
+                            <BarComponent2chart title={'MSI/LOCATED'} labels={labels} data={[chartFiltered.msi.labels, chartFiltered.located.labels]} chartData={[chartFiltered.msi.data, chartFiltered.located.data]} chartH={250} />
                         </div>
-                        <div className="chart-item">
-                            <BarHorizontalComponent  y={true} title={'Causas Principales'} data={chartLost.data} arr={chartLost.arr} y={true} />
+                        <div className="chart-item animate__animated animate__backInLeft">
+                          <BarHorizontalComponent  y={true} title={'Causas Principales'} data={chartLost.data} arr={chartLost.arr} y={true}/> 
                         </div>
                     </div>
                     <div>
                         
                     </div>
                     <div className="chart-seccion">
-                        <div className="chart-item borderBottom ">
+                        <div className="chart-item borderBottom animate__animated animate__backInRight">
                             {/* <BarComponent position={true} title={'Localizados'} labels={labels} data={cLocated} chartData={chartLocated}/> */}
                         </div>
-                        <div className="chart-item">
-                            <BarComponent  y={true} position={true} title={'Tiempo Promedio'}  chartH={330}/>
+                        <div className="chart-item" >
+                            <BarComponentTime  position={true} title={'Tiempo Promedio'} labels={labels} data={chartTime}/>
                         </div>
                     </div>
                    

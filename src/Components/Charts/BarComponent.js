@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react'
+import {useEffect, useState } from 'react'
 
 //Ants
 import {Modal} from 'antd';
@@ -7,81 +7,119 @@ import {Modal} from 'antd';
 import {Bar} from 'react-chartjs-2'
 import HeaderReport from '../Reports/HeaderReport';
 import TableMSI from '../Reports/MSI/TableMSI';
-import TableLocated from '../Reports/Located/TableLocated';
 
 
+const initialState = {
+    active: [],
+    inactive: [],
+    stock: []
+}
 
-const BarComponent = ({title, labels, data = [], chartData, msi = false, y= false, position = false, chartH}) => {
+const BarComponentCenter = ({title, labels, data = [], y= false, position = false, chartH, stock}) => {
+    const [porcentage, setporcentage] = useState(initialState);
 
 
+    useEffect(() => {
+        let aux,aux2,aux3;
+
+        if(data.length> 0){
+                aux = data.map(item => item.totalActives);
+                aux2 = data.map(item => item.totalInactives);
+                aux3 = data.map(item => item.totalStock)
+                setporcentage({
+                    active:[aux[7],aux[6],aux[5],aux[4],aux[3],aux[2],aux[1],aux[0]],
+                    inactive :[aux2[7],aux2[6],aux2[5],aux2[4],aux2[3],aux2[2],aux2[1],aux2[0]],
+                    stock: [aux3[7],aux3[6],aux3[5],aux3[4],aux3[3],aux3[2],aux3[1],aux3[0]]
+                });            
+        };
+        
+    }, [stock, data]);
+    
     //Drawer
     const [visible, setVisible] = useState(false);
-    const [drawerData, setdrawerData] = useState({});
+    const [drawerData, setdrawerData] = useState([]);
     const [type, setType] = useState('');
-    const [long, setLong] = useState('');
-
-
-
-    useEffect(() => (type === 'Desaparecidos')  ? setLong(drawerData.msi?.length) : setLong(drawerData.located?.length), [drawerData,msi,type]);
+    
 
     
+
+
+    //useEffect(() => (type === 'Desaparecidos')  ? setLong(drawerData.msi?.length) : setLong(drawerData.located?.length), [drawerData,msi,type]);
+
+    const d = (stock) => {
+        
+        if(stock){
+            return [
+                {
+                    label: 'Activos',
+                    data: porcentage.active,
+                    borderColor: '#0a7ffb',
+                    backgroundColor: 'rgba(24, 108, 209, 0.3)',
+                    borderWidth: 1,
+                                
+                    
+                },
+                {
+                    label: 'Inactivos',
+                    data: porcentage.inactive,
+                    borderColor: 'rgba(255,140,0)',
+                    backgroundColor: 'rgba(255,140,0, 0.2)',
+                    borderWidth: 1,
+                    
+                    
+                    
+                },
+                {
+                    label:  'Almacen',
+                    data: porcentage.stock,
+                    borderColor: 'rgba(149,150,154)',
+                    backgroundColor: 'rgba(149,150,154, 0.2)',
+                    borderWidth: 1,
+                    
+                    
+                    
+                },
+            ]
+        }
+
+        return [
+            {
+                label: 'Activos',
+                data: porcentage.active,
+                borderColor: '#0a7ffb',
+                backgroundColor: 'rgba(24, 108, 209, 0.3)',
+                borderWidth: 1,
+            },
+            {
+                label: 'Inactivos',
+                data: porcentage.inactive,
+                borderColor: 'rgba(255,140,0)',
+                backgroundColor: 'rgba(255,140,0, 0.2)',
+                borderWidth: 1,
+                
+                
+            },
+        ]
+    }
     
   
     return (
         <div className={(position) ? "text-start left kpi": " text-end rigth kpi"}>
-            <h3 className={(position) ? "ml-5": "mr-5"}>{data && data[7]}</h3>
+            <h3 className={(position) ? "ml-5": "mr-5", "active"}>{`Activos: ${data[0] ? data[0].porcentajeActivesWOS : ""}%`}</h3>
+            <h3 className={(position) ? "ml-5": "mr-5", "inactive"}>{`Inactivos: ${data[0] ?  data[0].porcentajeInactivesWOS : ""}%`}</h3>
+            { stock && <h3 className={(position) ? "ml-5": "mr-5", "stock"}>{`Almacen: ${data[0] ? data[0].porcentajeStock : ""}%`}</h3>}
             <Bar
                 data={{ 
                     labels,
-
-                    datasets:[
-                        {
-                            label: 'Desaparecidos',
-                            data: data[0],
-                            borderColor: 'rgba(234, 39, 4)',
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderWidth: 1
-                        },
-                        {
-                            label: 'Localizados',
-                            data: data[1],
-                            borderColor: '#0a7ffb',
-                            backgroundColor: 'rgba(24, 108, 209, 0.3)',
-                            borderWidth: 1
-                        }
-
-                    ]
-                    
-                  /*   datasets: [{
-                    label: 'Desaparecidos',
-                    data: data,
-                    backgroundColor: [
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                    ],
-                    borderColor: [
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(153, 102, 255, 1)',
-                    
-                    ],
-                    borderWidth: 1
-                }] */
+                    datasets: d(stock)
             }}
-
+            
             options={{
+                
                 maintainAspectRatio:true,
                 indexAxis: (y)? 'y': '',
                 responsive:true,
-                events: ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove'],
+                
                 plugins: {
                     legend:{
                         position:'bottom'
@@ -91,32 +129,43 @@ const BarComponent = ({title, labels, data = [], chartData, msi = false, y= fals
                         text: title,
                         position:'top'
                     },
+                    
+                    
                 },
+                scales: {
+                    x:{
+                        stacked:true
+                    },
+                    y:{
+                        stacked:true,
+                    }
+                },
+                
+                
+    
                 
                 onClick: function(c,i) {
                     let e = i[0];
 
                     if(e){
 
-                        //console.log(this.tooltip.$context.tooltipItems[0].dataset.label);
-                        //console.log(this.data.datasets);
-                        //console.log(this.data.labels[e.index]);
+                        //this.tooltip.$context.tooltipItems[0].dataset.label;
 
-                        if(this.tooltip.$context.tooltipItems[0].dataset.label  === 'Desaparecidos'){
-                            console.log(chartData[0]);
-                            console.log(chartData[0].filter(obj => obj.date === this.data.labels[e.index])[0]);
-                            setdrawerData( chartData[0].filter(obj => obj.date === this.data.labels[e.index])[0]);
-                            setType('Desaparecidos');
-                        }else{
-                            console.log(chartData[1]);
-                            console.log(chartData[1].filter(obj => obj.date === this.data.labels[e.index])[0]);
-                            setdrawerData( chartData[1].filter(obj => obj.date === this.data.labels[e.index])[0]);
-                            setType('Localizados');
+                        if(this.tooltip.$context.tooltipItems[0].dataset.label === 'Activos'){
+                            setType('Activos');
+                            setdrawerData(data.filter(item => item.date === this.data.labels[e.index])[0].actives);
+                            
+                        }else if(this.tooltip.$context.tooltipItems[0].dataset.label === 'Inactivos'){
+                            setType('Inactivos');
+                            setdrawerData(data.filter(item => item.date === this.data.labels[e.index])[0].inactives);
+                            
+                        }else if(this.tooltip.$context.tooltipItems[0].dataset.label === 'Almacen'){
+                            setType('Almacen');
+                            setdrawerData(data.filter(item => item.date === this.data.labels[e.index])[0].stock);
+                            
                         }
 
-                        /* setdrawerData( chartData.filter(obj => obj.date === this.data.labels[e.index])[0]);*/
-
-                        
+                      
                         setTimeout(() => {setVisible(true)}, 300); 
                     }
                     
@@ -137,27 +186,21 @@ const BarComponent = ({title, labels, data = [], chartData, msi = false, y= fals
              >
               
                      <HeaderReport 
-                    typeReport={(type === 'Desaparecidos') ? "Missing In Action" : "Located"} 
-                    description={(type === 'Desaparecidos') ? "Resumen de unidades que no han reportado las ultimas 24 hrs.": "Resumen de unidades que volvieron a reportar despues de estar por lo menos 24hrs perdidos" }
-                    dl={long}
+                    typeReport={type} 
+                    description={(type === 'Activos') ? "Resumen de unidades reportando": (type === 'Inactivos') ? "Resumen de unidades inactivas" : "Resumen de unidades en almacen" }
+                    dl={drawerData.length}
                     
                 />
                 
-              { (type === 'Desaparecidos') ?  (
+
                             <TableMSI 
-                            data={drawerData.msi} 
+                            data={drawerData} 
                             comments={"MSI Report"} 
                             isLoading={false}
                                 />
-                        ): 
-                        (
-                            <TableLocated 
-                             data={drawerData.located} 
-                             comments={"Located Report"} 
-                             isLoading={false}  
-                             /> 
-                        )    
-                }
+
+
+
                   
               
                 </Modal> 
@@ -169,21 +212,4 @@ const BarComponent = ({title, labels, data = [], chartData, msi = false, y= fals
     )
 }
 
-export default BarComponent
-
-//Colores
-// 'rgba(54, 162, 235, 0.2)',
-//'rgba(255, 206, 86, 0.2)',
-//'rgba(75, 192, 192, 0.2)',
-//'rgba(153, 102, 255, 0.2)',
-//'rgba(255, 159, 64, 0.2)',
-//'rgba(255, 159, 64, 0.2)'
-
-
-//Border
-//'rgba(54, 162, 235, 1)',
-//'rgba(255, 206, 86, 1)',
-//'rgba(75, 192, 192, 1)',
-//'rgba(153, 102, 255, 1)',
-//'rgba(255, 159, 64, 1)',
-//'rgba(255, 159, 64, 1)'
+export default BarComponentCenter

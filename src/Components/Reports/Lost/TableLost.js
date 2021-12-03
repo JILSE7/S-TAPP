@@ -14,6 +14,7 @@ import {
 
 import TableBodyMSI from '../MSI/TableBodyMSI';
 
+
 const antIcon = <LoadingOutlined style={{ fontSize: 54 }} spin />;
 
 const TableLost = ({data, comments, isLoading}) => {
@@ -27,6 +28,7 @@ const TableLost = ({data, comments, isLoading}) => {
             </div>
         )
     }
+    
     return (
         <Table variant="striped" className="text-center table_report">
             
@@ -40,6 +42,8 @@ const TableLost = ({data, comments, isLoading}) => {
                         <Th>Cliente</Th>
                         <Th >Unidad</Th>
                         <Th >Estatus</Th>
+                        <Th >Version</Th>
+                        <Th >Etapa</Th>
                         <Th >Último evento</Th>
                         <Th >Fecha evento</Th>
                         <Th >Dias Desaparecido</Th>
@@ -58,10 +62,12 @@ const TableLost = ({data, comments, isLoading}) => {
                                     status={client.H_Conectivity_Alias_2_Status} 
                                     last_event={client.H_Conectivity_Event} 
                                     last_event_date={client.H_Conectivity_Event_Date}
-                                    date_generation={client.H_Conectivity_Date_Report_Generation}
+                                    date_generation={client.H_Conectivity_Date_Report}
                                     latitude={client.H_Conectivity_Latitude}
                                     longitude={client.H_Conectivity_Longitude}
                                     lostDays = {client.H_Conectivity_Days_Without_Report}
+                                    stage={client.H_Conectivity_Commercial_Stage}
+                                    version={client.H_Conectivity_Product_Version}
                                     />))
                             }
                         </Tbody>
