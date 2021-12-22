@@ -13,10 +13,12 @@ import Header from '../Components/Layout/Header'
 import Footer from '../Components/Layout/Footer';
 import Report from '../Components/Reports/Report'
 import UseChart from '../Hooks/UseChart';
-import BarComponentCenter from '../Components/Charts/BarComponent';
-import BarHorizontalComponent from '../Components/Charts/BarHorizontalComponent';
-import BarComponent2chart from '../Components/Charts/BarComponent2chart';
-import BarComponentTime from '../Components/Charts/BarComponentTime';
+import BarComponentCenter from '../Components/Charts/ChartCenter'
+import BarComponent2chart from '../Components/Charts/ChartMsiLocated';
+import ChartTimeAverage from '../Components/Charts/CharTimeAverage';
+import ChartMainCauses from '../Components/Charts/ChartMainCauses';
+import ChartMsiLocated from '../Components/Charts/ChartMsiLocated';
+import ChartCenter from '../Components/Charts/ChartCenter';
 
 
 
@@ -34,6 +36,7 @@ const Reports = () => {
     const toggleStock = () => {
         setStock(!stock)
     }
+    
 
     function onChange(date, dateString) {
         
@@ -41,7 +44,9 @@ const Reports = () => {
             setDate(dateString);
             setStock(false);    
         }
-}
+    }
+
+    console.log(chartTime);
     
 
     return (
@@ -61,14 +66,14 @@ const Reports = () => {
               
                 <section className="charts">
                     <div className="chart-center animate__animated animate__fadeInDownBig" >
-                    <BarComponentCenter  labels={labels} data={chartPorcent} stock={stock} chartH={200}/>
+                    <ChartCenter  labels={labels} data={chartPorcent} stock={stock} chartH={200}/>
                     </div>
                     <div className="chart-seccion">
                         <div className="chart-item borderBottom animate__animated animate__backInLeft">
-                            <BarComponent2chart title={'MSI/LOCATED'} labels={labels} data={[chartFiltered.msi.labels, chartFiltered.located.labels]} chartData={[chartFiltered.msi.data, chartFiltered.located.data]} chartH={250} />
+                            <ChartMsiLocated title={'MSI/LOCATED'} labels={labels} data={[chartFiltered.msi.labels, chartFiltered.located.labels]} chartData={[chartFiltered.msi.data, chartFiltered.located.data]} chartH={250} />
                         </div>
                         <div className="chart-item animate__animated animate__backInLeft">
-                          <BarHorizontalComponent  y={true} title={'Causas Principales'} data={chartLost.data} arr={chartLost.arr} y={true}/> 
+                          <ChartMainCauses  y={true} title={'Causas Principales'} data={chartLost.data} arr={chartLost.arr} y={true}/> 
                         </div>
                     </div>
                     <div>
@@ -79,7 +84,7 @@ const Reports = () => {
                             {/* <BarComponent position={true} title={'Localizados'} labels={labels} data={cLocated} chartData={chartLocated}/> */}
                         </div>
                         <div className="chart-item" >
-                            <BarComponentTime  position={true} title={'Tiempo Promedio'} labels={labels} data={chartTime}/>
+                            <ChartTimeAverage  position={true} title={'Tiempo Promedio'} labels={labels} data={chartTime}/>
                         </div>
                     </div>
                    

@@ -15,7 +15,7 @@ const initialState = {
     stock: []
 }
 
-const BarComponentCenter = ({title, labels, data = [], y= false, position = false, chartH, stock}) => {
+const ChartCenter = ({title, labels, data = [], y= false, position = false, chartH, stock}) => {
     const [porcentage, setporcentage] = useState(initialState);
 
 
@@ -212,4 +212,4 @@ const BarComponentCenter = ({title, labels, data = [], y= false, position = fals
     )
 }
 
-export default BarComponentCenter
+export default ChartCenter;

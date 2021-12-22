@@ -8,7 +8,7 @@ export const uploadData = async(file) => {
     formData.append('file', file);
 
     try {
-        const respuesta = await (await fetch("http://172.20.1.36/apiST/Routes/Test.php",{
+        const respuesta = await (await fetch("http://172.20.10.15/apiST/Routes/Test.php",{
             method:"POST",
             body: formData
         })).json();
@@ -16,7 +16,7 @@ export const uploadData = async(file) => {
         return respuesta;
     } catch (error) {
 
-        const resp = await (await fetch("http://172.20.1.36/apiST/Routes/Delete.php")).json()
+        const resp = await (await fetch("http://172.20.10.15/apiST/Routes/Delete.php")).json()
         return {
             ok:false,
             msg: "Hubo un error",

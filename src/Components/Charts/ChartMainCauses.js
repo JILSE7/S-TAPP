@@ -11,7 +11,7 @@ import HeaderReport from '../Reports/HeaderReport';
 
 
 
-const BarHorizontalComponent = ({title, data,arr, y= false, position = false}) => {
+const ChartMainCauses = ({title, data,arr, y= false, position = false}) => {
 
     //Drawer
     const [visible, setVisible] = useState(false);
@@ -103,4 +103,4 @@ const BarHorizontalComponent = ({title, data,arr, y= false, position = false}) =
     )
 }
 
-export default BarHorizontalComponent;
+export default ChartMainCauses;

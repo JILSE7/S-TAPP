@@ -11,7 +11,7 @@ import TableLocated from '../Reports/Located/TableLocated';
 
 
 
-const BarComponent2chart = ({title, labels, data = [], chartData, msi = false, y= false, position = false, chartH}) => {
+const ChartMsiLocated = ({title, labels, data = [], chartData, msi = false, y= false, position = false, chartH}) => {
 
 
     //Drawer
@@ -137,7 +137,7 @@ const BarComponent2chart = ({title, labels, data = [], chartData, msi = false, y
     )
 }
 
-export default BarComponent2chart
+export default ChartMsiLocated;
 
 //Colores
 // 'rgba(54, 162, 235, 0.2)',

@@ -1,4 +1,4 @@
-const baseURL = 'http://172.20.1.36/apiST'
+const baseURL = 'http://172.20.10.15/apiST'
 
 const fetchFunction = (endpoint, data, method = 'GET') =>{
 

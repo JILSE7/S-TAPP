@@ -1,10 +1,14 @@
-import React, {useState} from 'react'
+import { Modal } from 'antd';
 import { Bar } from 'react-chartjs-2';
+import UseDrawer from '../../Hooks/UseDrawer';
+import HeaderReport from '../Reports/HeaderReport';
+import TableLost from '../Reports/Lost/TableLost';
 
 
-const BarComponentTime = ({title, labels, data = [], y= false, position = false, chartH, stock}) => {
 
-    
+const ChartTimeAverage = ({title, labels, data = [], y= false, position = false, chartH}) => {
+
+    const {visible,setVisible,drawerData,setdrawerData,type,setType} = UseDrawer();
     
     return (
         <div className={(position) ? "text-start left kpi hola": " text-end rigth kpi hola"}>
@@ -42,10 +46,22 @@ const BarComponentTime = ({title, labels, data = [], y= false, position = false,
                     
                     
                 },
+                 
+                onClick: function(c,i) {
+                    let e = i[0];
+
+                    if(e){
+                        
+                        setdrawerData(data.filter(item => item.date == this.tooltip.$context.tooltipItems[0].label)[0].data);
+                        
+                        setTimeout(() => {setVisible(true)}, 300); 
+                    }
+                    
+                }
             }}
             height = {chartH}
             />
-            {/* 
+            
                 <Modal
                 className="modal"
                 title="Detalles del reporte"
@@ -53,19 +69,19 @@ const BarComponentTime = ({title, labels, data = [], y= false, position = false,
                 visible={visible}
                 onCancel={() => setVisible(false)}
                 footer={[]}
-                width={1100}
+                width={1300}
               
              >
               
-                     <HeaderReport 
+                     <HeaderReport
                     typeReport={type} 
-                    description={(type === 'Activos') ? "Resumen de unidades reportando": (type === 'Inactivos') ? "Resumen de unidades inactivas" : "Resumen de unidades en almacen" }
+                    description={"Resumen del tiempo promedio de unidades sin reportar"}
                     dl={drawerData.length}
                     
                 />
                 
 
-                            <TableMSI 
+                            <TableLost
                             data={drawerData} 
                             comments={"MSI Report"} 
                             isLoading={false}
@@ -75,7 +91,7 @@ const BarComponentTime = ({title, labels, data = [], y= false, position = false,
 
                   
               
-                </Modal>  */}
+                </Modal> 
                
            
            
@@ -84,4 +100,4 @@ const BarComponentTime = ({title, labels, data = [], y= false, position = false,
     )
 }
 
-export default BarComponentTime
+export default ChartTimeAverage
