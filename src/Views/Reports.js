@@ -81,7 +81,7 @@ const Reports = () => {
                     </div>
                     <div className="chart-seccion">
                         <div className="chart-item borderBottom animate__animated animate__backInRight">
-                            {/* <BarComponent position={true} title={'Localizados'} labels={labels} data={cLocated} chartData={chartLocated}/> */}
+                            {/* <BarComponent position={true} title={'Localizados'} labels={labels} data={cLocated} chartData={chartLocated}/>  */}
                         </div>
                         <div className="chart-item" >
                             <ChartTimeAverage  position={true} title={'Tiempo Promedio'} labels={labels} data={chartTime}/>

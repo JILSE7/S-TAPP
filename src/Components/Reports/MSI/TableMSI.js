@@ -16,10 +16,10 @@ import { getDateForTable } from '../../../Helpers/Date';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 54 }} spin />;
 
-const TableMSI = ({data, comments, isLoading}) => {
+const TableMSI = ({data = [], comments, isLoading}) => {
     
     
-    
+    console.log(data);
 
     if(isLoading){
         return(

@@ -5,7 +5,7 @@ import {
   } from "@chakra-ui/react";
 
 const TableBodyMSI = ({date_generation,product,customer, unit,status,version, stage, id_service, last_event, last_event_date, latitude, longitude, lostDays = false}) => {
-    console.log(customer,status, version);
+    /* console.log(customer,status, version); */
     return (
         <Tr className="text-table font-mon tdTable animate__animated animate__flash">
         <Td className="animate__animated animate__flash" >{date_generation}</Td>

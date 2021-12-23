@@ -13,22 +13,25 @@ const UseData = () => {
         chartTime: [],
     });
 
-/*     const [isLoadingMSI, setisLoadingMSI] = useState(true);
-    const [isLoadingLoc, setisLoadingLoc] = useState(true); */
 
+    //State de carga de informacion
     const [isLoading, setIsloading] = useState(true);
+    //State de cambio de fecha
     const [dateReport, setDate] = useState(undefined);
+    //State de nueva data
     const [newData, setnewData] = useState(false);
+    //State de stock
+    const [stock, setStock] = useState(false);
 
     
 
     //Funcion para obtener la data
     const getData = async() => {
         const [MSI, loc, lost, chart, chartCenter, chartTime] = await Promise.all([
-                (await fetchFunction(dateReport? `Routes/MSI.php?date="${dateReport}"` : "Routes/MSI.php")).json(),
+                (await fetchFunction(dateReport? !stock ? `Routes/MSI.php?date="${dateReport}"&stock=false` : `Routes/MSI.php?date="${dateReport}"` : !stock ? "Routes/MSI.php?stock=false":"Routes/MSI.php")).json(),
                 (await fetchFunction(dateReport? `Routes/Located.php?date="${dateReport}"` : 'Routes/Located.php')).json(),
-                (await fetchFunction(dateReport? `Routes/Lost.php?date="${dateReport}"` : 'Routes/Lost.php')).json(),
-                (await fetchFunction(dateReport? `Routes/Chart.php?date=${dateReport}` : 'Routes/Chart.php')).json(),
+                (await fetchFunction(dateReport? !stock ? `Routes/Lost.php?date="${dateReport}"&stock=false` : `Routes/Lost.php?date="${dateReport}"` : !stock ? 'Routes/Lost.php?stock=false' :'Routes/Lost.php?stock=false' )).json(),
+                (await fetchFunction(dateReport? !stock ? `Routes/Chart.php?date=${dateReport}&stock=false` :`Routes/Chart.php?date=${dateReport}` : !stock ? 'Routes/Chart.php?stock=false' :'Routes/Chart.php' )).json(),
                 (await fetchFunction(dateReport? `Routes/Chart2.php?date=${dateReport}` : 'Routes/Chart2.php')).json(),
                 (await fetchFunction(dateReport? `Routes/ChartTime.php?date=${dateReport}` : 'Routes/ChartTime.php')).json(),
         ]);
@@ -36,9 +39,10 @@ const UseData = () => {
 
         setIsloading(true);
         
+        console.log(MSI);
         //Estableciendo la data
         setData({
-            msi: [...MSI],
+            msi: {data:MSI.data, count: MSI.count}, 
             located: [...loc],
             lost : [...lost],
             chartMsi: [...chart.msi],
@@ -57,7 +61,14 @@ const UseData = () => {
     useEffect(() => {
         
         getData();
-    }, [dateReport, newData]);
+    }, [dateReport, newData,stock]);
+
+    useEffect(() => {
+        console.log(stock);
+        const hola = dateReport? !stock ?  `Routes/MSI.php?date="${dateReport}"&stock=false` : `Routes/MSI.php?date="${dateReport}"`  : !stock ? "Routes/MSI.php?stock=false":"Routes/MSI.php";
+        console.log(hola);
+        
+    }, [stock])
 
     return {
         ...data,
@@ -65,7 +76,9 @@ const UseData = () => {
         setIsloading,
         setDate,
         setnewData,
-        dateReport
+        dateReport,
+        stock, 
+        setStock
     }
 
 

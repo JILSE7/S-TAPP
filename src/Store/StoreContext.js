@@ -7,10 +7,22 @@ export const StopContext = createContext();
 export const StopProvider = ({children}) => {
 
         //HOOK USE DATA
-        const {msi, located,lost,isLoading, chartMsi, chartLocated,chartPorcent,chartTime,setIsloading, setDate, dateReport, setnewData} = UseData()
+        const { msi, 
+               located,
+               lost,
+               isLoading, 
+               chartMsi, 
+               chartLocated,
+               chartPorcent,
+               chartTime,
+               setIsloading, 
+               setDate, 
+               dateReport, 
+               setnewData, 
+               stock, 
+               setStock} = UseData()
 
-        //Stockt
-        const [stock, setStock] = useState(false);
+ 
 
         //DataFiltrada
         const [lostFiltered, setlostFiltered] = useState([]);

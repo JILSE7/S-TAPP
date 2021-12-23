@@ -31,11 +31,11 @@ const Report = () => {
                 <HeaderReport 
                     typeReport={"Missing In Action"} 
                     description={"Resumen de unidades que no han reportado las ultimas 24 hrs."}
-                    dl={msi.length}
+                    dl={msi.count}
                 />
                 
                 <TableMSI 
-                    data={msi} 
+                    data={msi.data} 
                     comments={"MSI Report"} 
                     isLoading={isLoading}
                 />
