@@ -3,9 +3,9 @@ import { useState } from "react";
 
 
 
-const UseDrawer = () => { 
+const UseDrawer = (data) => { 
     const [visible, setVisible] = useState(false);
-    const [drawerData, setdrawerData] = useState([]);
+    const [drawerData, setdrawerData] = useState(data? data : []);
     const [type, setType] = useState('');
     return {
         visible,

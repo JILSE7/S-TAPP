@@ -22,11 +22,13 @@ export const chartData = (data, msi = false) => {
 
 //Labels - etiquetas para las graficas
 export const chartLostLabels = (data) => {
+    //console.log(data);
     return [ ...new Set(data.map(lost => (lost.H_Conectivity_Alias_2_Status === null) ? 'Sin status registrado' : lost.H_Conectivity_Alias_2_Status))]; 
 }
 
 //DataLabels
 export const chartLostData = (labels, data, arr = false) => {
+    //console.log(labels);
     let aux2;
     let aux3 = []
     for(const label of labels){

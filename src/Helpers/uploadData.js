@@ -15,7 +15,7 @@ export const uploadData = async(file) => {
 
         return respuesta;
     } catch (error) {
-
+        console.log(error);
         const resp = await (await fetch("http://172.20.10.15/apiST/Routes/Delete.php")).json()
         return {
             ok:false,

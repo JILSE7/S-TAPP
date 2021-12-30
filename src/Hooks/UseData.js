@@ -32,14 +32,20 @@ const UseData = () => {
                 (await fetchFunction(dateReport? `Routes/Located.php?date="${dateReport}"` : 'Routes/Located.php')).json(),
                 (await fetchFunction(dateReport? !stock ? `Routes/Lost.php?date="${dateReport}"&stock=false` : `Routes/Lost.php?date="${dateReport}"` : !stock ? 'Routes/Lost.php?stock=false' :'Routes/Lost.php?stock=false' )).json(),
                 (await fetchFunction(dateReport? !stock ? `Routes/Chart.php?date=${dateReport}&stock=false` :`Routes/Chart.php?date=${dateReport}` : !stock ? 'Routes/Chart.php?stock=false' :'Routes/Chart.php' )).json(),
-                (await fetchFunction(dateReport? `Routes/Chart2.php?date=${dateReport}` : 'Routes/Chart2.php')).json(),
+                (await fetchFunction(dateReport? `Routes/ChartConectivity.php?date=${dateReport}` : 'Routes/ChartConectivity.php')).json(),
                 (await fetchFunction(dateReport? `Routes/ChartTime.php?date=${dateReport}` : 'Routes/ChartTime.php')).json(),
         ]);
         
 
         setIsloading(true);
         
-        console.log(MSI);
+/*         console.log("msi",MSI);
+        console.log("located",...loc);
+        console.log("lost",lost);
+        console.log("chart",chart);
+        console.log("chartCenter",chartCenter);
+        console.log("chartTime", chartTime); */
+
         //Estableciendo la data
         setData({
             msi: {data:MSI.data, count: MSI.count}, 
@@ -59,16 +65,16 @@ const UseData = () => {
 
     
     useEffect(() => {
-        
+
         getData();
     }, [dateReport, newData,stock]);
 
-    useEffect(() => {
+/*     useEffect(() => {
         console.log(stock);
         const hola = dateReport? !stock ?  `Routes/MSI.php?date="${dateReport}"&stock=false` : `Routes/MSI.php?date="${dateReport}"`  : !stock ? "Routes/MSI.php?stock=false":"Routes/MSI.php";
         console.log(hola);
         
-    }, [stock])
+    }, [stock]) */
 
     return {
         ...data,

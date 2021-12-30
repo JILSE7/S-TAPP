@@ -8,13 +8,12 @@ import TableLost from '../Reports/Lost/TableLost';
 
 const ChartTimeAverage = ({title, labels, data = [], y= false, position = false, chartH}) => {
 
-    const {visible,setVisible,drawerData,setdrawerData,type,setType} = UseDrawer();
-    
+    const {visible,setVisible,drawerData,setdrawerData,type} = UseDrawer();
     return (
         <div className={(position) ? "text-start left kpi hola": " text-end rigth kpi hola"}>
-            <h3 className={(position) ? "ml-5": "mr-5", "active"}>{}</h3>
-            <h3 className={(position) ? "ml-5": "mr-5", "inactive"}>{}</h3>
-            <h3 className={(position) ? "ml-5": "mr-5", "stock"}>{}</h3>
+            <h3 className={(position) ? "ml-5": "mr-5 active"}>{}</h3>
+            <h3 className={(position) ? "ml-5": "mr-5 inactive"}>{}</h3>
+            <h3 className={(position) ? "ml-5": "mr-5 stock"}>{}</h3>
             <Bar
                 data={{ 
                     labels,
@@ -42,9 +41,7 @@ const ChartTimeAverage = ({title, labels, data = [], y= false, position = false,
                         display:true,
                         text: title,
                         position:'top'
-                    },
-                    
-                    
+                    }, 
                 },
                  
                 onClick: function(c,i) {
@@ -69,7 +66,7 @@ const ChartTimeAverage = ({title, labels, data = [], y= false, position = false,
                 visible={visible}
                 onCancel={() => setVisible(false)}
                 footer={[]}
-                width={1300}
+                width={1350}
               
              >
               

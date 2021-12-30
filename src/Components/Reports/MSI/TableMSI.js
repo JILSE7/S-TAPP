@@ -19,7 +19,7 @@ const antIcon = <LoadingOutlined style={{ fontSize: 54 }} spin />;
 const TableMSI = ({data = [], comments, isLoading}) => {
     
     
-    console.log(data);
+    
 
     if(isLoading){
         return(

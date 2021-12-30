@@ -55,7 +55,15 @@
             margin: 20px 0;
 
             .ant-picker{
-                margin-right: 150px;
+                margin-right: 65px;
+            }
+
+            .options{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 250px;
+                
             }
 
             .car-stock{

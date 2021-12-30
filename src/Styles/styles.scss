@@ -56,6 +56,7 @@ body{
     .ant-modal-content{
         background-color: #07101d !important;
         height: auto;
+        min-width: 1250px;
     }
     .ant-modal-header, .ant-modal-footer{
         background-color: $stop !important;
@@ -63,6 +64,7 @@ body{
         border-top: none;
     }
     .ant-modal-body{
+        
         height: 100%;
         color: white;
     }
